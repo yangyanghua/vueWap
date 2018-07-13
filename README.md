@@ -1,6 +1,6 @@
-# 码上花wap
+# wap
 
-> 码上花：登录、注册、商品详情、订单结算、支付、个人中心。
+> 登录、注册、商品详情、订单结算、支付、个人中心。
 
 ## Build Setup
 
@@ -34,6 +34,5 @@ npm run build --report
 ## assets 目录下有个rename.js文件，是用于统一重名图片的，将ui切图考到images文件夹下，打开控制台，运行rename，即可统一重命名图片为以上格式。    
     
 ```    
-具体可参考 项目(git@192.168.5.251:yanghua/zcode-guanwang-wap.git)；
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
