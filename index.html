@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh">
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    <title>码上花</title>
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <!--<meta name="keywords" content="溯源、购物、二维码、防伪,真知码、全球质量溯源体系、一物一码、见物购物、扫码购物、质量标识、防伪溯源、防伪码、移动物联网、二维码防伪">
+    <meta name="description" content="引领世界溯源技术12载，开创见物购物营销新模式。自主知识产权，确保国家企业个人信息安全，与中国国检共建CIQ进出口商品全球质量溯源体系，致力于推动中国商品质量标识统一，构建＂买真品，认准真知码＂的健康市场生态。">-->
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="msapplication-tap-highlight" content="no" />
+    <script src="/static/swiper.min.js"></script>
+    <link rel="stylesheet" href="/static/swiper.min.css">
+    <link rel="stylesheet" href="/static/swiper.animate1.0.2.min.js">
+    <script>
+        ! function(a, b) {
+            function c() {
+                var b = f.getBoundingClientRect().width;
+                b / i > 540 && (b = 540 * i);
+                var c = b / 10;
+                f.style.fontSize = c + "px", k.rem = a.rem = c
+            }
+            var d, e = a.document,
+                f = e.documentElement,
+                g = e.querySelector('meta[name="viewport"]'),
+                h = e.querySelector('meta[name="flexible"]'),
+                i = 0,
+                j = 0,
+                k = b.flexible || (b.flexible = {});
+            if (g) {
+                console.warn("将根据已有的meta标签来设置缩放比例");
+                var l = g.getAttribute("content").match(/initial\-scale=([\d\.]+)/);
+                l && (j = parseFloat(l[1]), i = parseInt(1 / j))
+            } else if (h) {
+                var m = h.getAttribute("content");
+                if (m) {
+                    var n = m.match(/initial\-dpr=([\d\.]+)/),
+                        o = m.match(/maximum\-dpr=([\d\.]+)/);
+                    n && (i = parseFloat(n[1]), j = parseFloat((1 / i).toFixed(2))), o && (i = parseFloat(o[1]), j = parseFloat((1 / i).toFixed(2)))
+                }
+            }
+            if (!i && !j) {
+                var p = a.navigator.userAgent,
+                    q = (!!p.match(/android/gi), !!p.match(/iphone/gi)),
+                    r = q && !!p.match(/OS 9_3/),
+                    s = a.devicePixelRatio;
+                i = q && !r ? s >= 3 && (!i || i >= 3) ? 3 : s >= 2 && (!i || i >= 2) ? 2 : 1 : 1, j = 1 / i
+            }
+            if (f.setAttribute("data-dpr", i), !g)
+                if (g = e.createElement("meta"), g.setAttribute("name", "viewport"), g.setAttribute("content", "initial-scale=" + j + ", maximum-scale=" + j + ", minimum-scale=" + j + ", user-scalable=no"), f.firstElementChild) f.firstElementChild.appendChild(g);
+                else {
+                    var t = e.createElement("div");
+                    t.appendChild(g), e.write(t.innerHTML)
+                }
+            a.addEventListener("resize", function() {
+                clearTimeout(d), d = setTimeout(c, 300)
+            }, !1), a.addEventListener("pageshow", function(a) {
+                a.persisted && (clearTimeout(d), d = setTimeout(c, 300))
+            }, !1), "complete" === e.readyState ? e.body.style.fontSize = 12 * i + "px" : e.addEventListener("DOMContentLoaded", function() {
+                e.body.style.fontSize = 12 * i + "px"
+            }, !1), c(), k.dpr = a.dpr = i, k.refreshRem = c, k.rem2px = function(a) {
+                var b = parseFloat(a) * this.rem;
+                return "string" == typeof a && a.match(/rem$/) && (b += "px"), b
+            }, k.px2rem = function(a) {
+                var b = parseFloat(a) / this.rem;
+                return "string" == typeof a && a.match(/px$/) && (b += "rem"), b
+            }
+        }(window, window.lib || (window.lib = {}));
+    </script>
+    <!--<script src="/static/vconsole.min.js"></script>-->
+</head>
+
+<body>
+
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+</body>
+
+</html>

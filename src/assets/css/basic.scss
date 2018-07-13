@@ -1,0 +1,99 @@
+    @charset "utf-8";
+    @import './lib/core';
+    @import './_partial/_vars';
+    @import './_partial/_mixin';
+    // @import './_partial/button';
+    // @import './_partial/icon';
+    @import './swiper.scss';
+    .flexGroup {
+        display: flex;
+    }
+     div,p,h1,h2,h3,h4,ul,li{box-sizing: border-box;}
+     
+    .flexcenterGroup {
+        display: inline-flex;
+        align-items: center;
+    }
+   
+    
+    body,
+    html {
+        background-color: #fff;
+        min-height: 100%;
+        @include fontsz(12px);
+        
+    }
+
+    .linkText {
+        color: $color-link;
+    }
+
+    .fs0 {
+        font-size: 0;
+    }
+
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"] {
+        -webkit-appearance: none;
+    }
+
+    textarea,
+    button {
+        -webkit-appearance: none;
+    }
+
+    button {
+        -webkit-appearance: none;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        outline: none
+    }
+
+    textarea {
+        resize: none
+    }
+input[type="text"]:focus,input[type="password"]:focus{
+    border:1px solid #E94D1B; /*no*/
+}
+.mainSection{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.accountTip.accountTip{
+  text-align: center;
+  margin-top: 25px;
+  color: $color-text;
+  @include fontsz(14px);
+  .link{
+    color: $color-primary;
+    margin-left: 5px;
+  }
+}
+
+/*清除浮动*/
+.clfix::after{
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+    zoom: 1; 
+}
+
+/*左浮动右浮动*/
+.fl{float:left;}
+.fr{float:right;}
+
+/*居中*/
+.locate{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}

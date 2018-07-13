@@ -1,0 +1,31 @@
+
+
+
+// @import './_partial/_vars';
+// @import './_partial/_mixin';
+.btn{
+  display: inline-block;
+  width: 200px;
+  height: 35px;
+  line-height: 35px;
+  @include fontsz(13px);
+  text-align: center;
+}
+.btn-primary{
+  @extend .btn;
+  background-color: $color-primary;
+  color: #fff;
+}
+.btn-default{
+  @extend .btn;
+  border: 1px solid $color-primary; /*no*/;
+  color: $color-primary;
+}
+// .btn-middle {
+//     @include fontsz(14px);
+//     @include icon(94px, 35px, './assets/images/Rectangle-61');
+//     color: #fff;
+//     text-align: center;
+//     line-height: 35px;
+// }
+
