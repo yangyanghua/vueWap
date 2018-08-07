@@ -4,20 +4,25 @@ import * as api from './api.js';
 let httpService = '';
 var currentHost = location.host;
 
-/*陈杰 ip 192.168.9.247:8383*/
+
+
+
+
+
+
 if (currentHost == 'localhost:8383') {
 
 
-  httpService = 'http://tmall.iflashbuy.com:8383'; //新接口测试地址
+  httpService = 'http://outmao.com:8088'; 
   
 
-} else if ((currentHost == 'tmsh-m.z-code.cn:8383')||(currentHost == 'tmsh-m.z-code.cn:8383')) {
+} else if (currentHost == '') {
 
-  httpService = 'http://tmall.iflashbuy.com:8383'; 
+  httpService = 'http://outmao.com:8088'; 
   
   
-} else if (currentHost == 'm.z-code.cn') {
-  httpService = 'http://website-api.z-code.cn'; //生產
+} else {
+  httpService = 'http://outmao.com:8088'; 
 }
 
 //const getKey = () => {
@@ -25,7 +30,7 @@ if (currentHost == 'localhost:8383') {
 //};
 
 let http = axios.create({
-  baseURL: httpService,
+  baseURL: '',
   /*data: {
      token: JSON.parse(sessionStorage.getItem('user')) ? JSON.parse(sessionStorage.getItem('user')).token : ''
   }*/
@@ -41,20 +46,15 @@ http.interceptors.request.use(function (config) {
 http.interceptors.response.use(function (response) {
 
   let data = response.data || {};
-  if(data.code){
-	  if (data.code == '0') {
+	  if (data.status == '0') {
 	    console.log("请求成功：" + data.message);
-	    return response.data;
+	    return response.data.data;
 	  }
 	  let tipMessage = {
 	    code: data.code,
 	    message: data.message
 	  }
 	  return Promise.reject(tipMessage);	  
-
-  }else{
-  	 return data;
-  }
 
 },function (error) {
   let tipMessage = {

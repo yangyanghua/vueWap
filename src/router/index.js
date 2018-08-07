@@ -6,6 +6,16 @@ Vue.use(Router)
  const router = new Router({
   routes: [
     {
+      path: '/',
+      name: 'visCard1',
+      component: resolve => {
+        require.ensure(['@/views/visitingCard/index.vue'], () => {
+          resolve(require('@/views/visitingCard/index.vue'));
+        }, 'chunk/visitingCard');
+      }
+    },
+
+    {
       path: '/visCard',
       name: 'visCard',
       component: resolve => {
@@ -24,10 +34,6 @@ Vue.use(Router)
         }, 'chunk/leaflets');
       }
     },
-
-
-
-
 
 
 

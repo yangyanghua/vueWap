@@ -1,17 +1,17 @@
 <template>
 	<section>
 		<div class="heaser">
-			<div class="logo"></div>
-			<p class="name">孙悟空</p>
-			<p class="entName">某某信息科技有限公司&nbsp;&nbsp; / &nbsp;&nbsp;技术总监</p>
-			<p class="add">广东省&nbsp;&nbsp; / &nbsp;&nbsp;广州市</p>
+			<div class="logo" style="background-size: contain;" v-bind:style="{backgroundImage: 'url(' + card.logo + ')'}"></div>
+			<p class="name">{{card.realname}}</p>
+			<p class="entName">{{card.companyName}}&nbsp;&nbsp; / &nbsp;&nbsp;{{card.post}}</p>
+			<p class="add">{{card.companyAddress.province}}&nbsp;&nbsp; / &nbsp;&nbsp;{{card.companyAddress.city}}</p>
 		</div>
 		<div class="cardInfo wap">
 			<h2 class="title">名片信息</h2>
 			<ul class="infolist">
-				<li class="infoItem phone">18378401067</li>
-				<li class="infoItem email">18378401067@163.com</li>
-				<li class="infoItem add">广东省广州市天河区xxx街道</li>
+				<li class="infoItem phone">{{card.phone}}</li>
+				<li class="infoItem email">{{card.email}}</li>
+				<li class="infoItem add">{{card.companyAddress.province+card.companyAddress.city+ card.companyAddress.district+card.companyAddress.details}}</li>
 			</ul>
 			
 		</div>
@@ -41,8 +41,8 @@
 		
 
 		<div class="qecode wap">
-			<p class="codename">孙悟空的二维码</p>
-			<div class="codeImg"></div>
+			<p class="codename">{{card.realname}}的二维码</p>
+			<div class="codeImg" style="background-size: contain;" v-bind:style="{backgroundImage: 'url(' + card.qrcode + ')'}"></div>
 			<p class="codefooter">使用微信扫一扫保存我的名片夹</p>
 		</div>		
 		
@@ -53,19 +53,34 @@
 </template>
 
 <script>
-//	import {deltailPro, deltailSku, deltailPurchase, chectProduct } from './server.js'
+	import {cardGet } from './server.js'
 	export default {
 		data(){
 			return {
-				
+				card:{
+					companyAddress:{}
+				}
 				
 			}
 		},
 		computed: {},
 		filters: {},
 		watch: {},
-		methods: {},
-		mounted(){}
+		methods: {
+			_cardGet(id){			
+				cardGet({id:id}).then((res)=>{
+					this.card = res;
+					console.log(res);
+					
+				}).catch((res)=>{
+
+				})
+			}
+			
+		},
+		mounted(){
+			this._cardGet('824');
+		}
 
 	}
 </script>
@@ -82,7 +97,6 @@
 		height: 68px;
 		width: 95px;
 		margin: auto;
-		background: deepskyblue;
 	}
 	p{
 		width: 80%;
@@ -193,7 +207,7 @@
 	.codeImg{
 		width: 164px;
 		height: 164px;
-		background: deepskyblue;
+		border: 1px solid #EEEEEE;
 		margin: 5px auto;
 	}
 		

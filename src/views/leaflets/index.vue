@@ -106,19 +106,44 @@
 </template>
 
 <script>
-//	import { } from './server.js'
+	import {leafletGet,commentByleaflet } from './server.js'
 	export default {
 		data(){
 			return {
-				
+				leaflet:{},
 				
 			}
 		},
 		computed: {},
 		filters: {},
 		watch: {},
-		methods: {},
-		mounted(){}
+		methods: {
+			_leafletGet(id){
+				
+				leafletGet({id:id}).then((res)=>{
+					this.leaflet = res;
+				}).catch((res)=>{
+					
+				})
+				
+			},
+			_commentByleaflet(leafletId){
+				commentByleaflet({leafletId:leafletId}).then((res)=>{
+					
+				}).catch((res)=>{
+					
+				})
+			}
+						
+			
+			
+		},
+
+	
+		mounted(){
+			this._leafletGet('790');
+			
+		}
 
 	}
 </script>
