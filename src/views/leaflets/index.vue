@@ -5,31 +5,25 @@
 				<span class="himg"></span>
 			</div>
 			<div class="userinfo">
-				<p class="name">孙悟空</p>
-				<p class="tiem">8小时前 &nbsp;&nbsp;•&nbsp;&nbsp;好日子生化管理有限公司</p>
+				<p class="name">{{leaflet.card.realname}}</p>
+				<p class="tiem">{{leaflet.createTime}} &nbsp;&nbsp;•&nbsp;&nbsp;{{leaflet.card.companyName}}</p>
 			</div>
 		</div>
 		
 		<div class="leaContent">
 			<p class="text">
-				如果有一天，突然来了一个闪电，然后突然实物拍摄。
-				裙长请参考出目标，裙子可以前面俩面」+哦如果有一
-				天，突然来了一个闪电，然后突然实物拍摄。裙长请
-				参考出目标，裙子可以前面俩面穿哦				
+				{{leaflet.descr}}
 			</p>
 				<ul class="imgList">
-					<li class="imgItem"><img src="../../assets/images/erc.jpg"/></li>
-					<li class="imgItem"><img src="../../assets/images/erc.jpg"/></li>
-					<li class="imgItem"><img src="../../assets/images/erc.jpg"/></li>
-					<li class="imgItem"><img src="../../assets/images/erc.jpg"/></li>
+					<li class="imgItem" v-for="(item,index) in imgs" :key="index" ><img :src="item"/></li>
 				</ul>
 
 		</div>
 		
 		<div class="footer">
 			<ul class="f-list">
-				<li class="f-item zan">赞999+</li>
-				<li class="f-item buy">购买量999+</li>
+				<li class="f-item zan">赞{{leaflet.statistics.tradeCount}}</li>
+				<li class="f-item buy">购买量{{leaflet.statistics.praiseCount}}</li>
 			</ul>
 		</div>
 		
@@ -110,7 +104,13 @@
 	export default {
 		data(){
 			return {
-				leaflet:{},
+				imgs:[],
+				leaflet:{
+					statistics:{},
+					card:{
+						
+					}
+				},
 				
 			}
 		},
@@ -122,6 +122,8 @@
 				
 				leafletGet({id:id}).then((res)=>{
 					this.leaflet = res;
+					this.imgs = res.images.split(',');
+					
 				}).catch((res)=>{
 					
 				})
@@ -141,8 +143,8 @@
 
 	
 		mounted(){
-			this._leafletGet('790');
-			
+			this._leafletGet('1142');
+			this._commentByleaflet('1142');
 		}
 
 	}
