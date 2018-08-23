@@ -15,7 +15,7 @@
 				{{leaflet.descr}}
 			</p>
 				<ul class="imgList">
-					<li class="imgItem" v-for="(item,index) in imgs" :key="index" ><img :src="item"/></li>
+					<li class="imgItem" v-for="(item,index) in imgs" :key="index" v-bind:style="{'background': 'url('+item+') no-repeat 50% 50%'}" ></li>
 				</ul>
 
 		</div>
@@ -29,65 +29,22 @@
 		
 		<div class="comments">
 			<ul class="commentsList">
-				<li class="commentsItem">
+				<li class="commentsItem" v-for="(item,index) in comments" >
 					<div class="commenter">
 						<div class="haerImg">
 							<span class="haer"></span>
 						</div>
 						<div class="info">
-							<p class="name">王多鱼</p>
+							<p class="name">{{item.user.username}}</p>
 						</div>
 					</div>
 					<div class="commentsContent">
 						<p class="contentTxt">
-							如果有一天，突然来了一个闪电，然后突然实物拍摄。
-							裙长请参考出目标，裙子可以前面俩面」+哦如果有一
-							天，突然来了一个闪电，然后突然实物拍摄。裙长请
-							参考出目标，裙子可以前面俩面穿哦									
+							{{item.content}}
 						</p>
-						<p class="time">2小时前</p>
+						<p class="time">{{item.createTime}}</p>
 					</div>
 				</li>
-
-				<li class="commentsItem">
-					<div class="commenter">
-						<div class="haerImg">
-							<span class="haer"></span>
-						</div>
-						<div class="info">
-							<p class="name">王多鱼</p>
-						</div>
-					</div>
-					<div class="commentsContent">
-						<p class="contentTxt">
-							如果有一天，突然来了一个闪电，然后突然实物拍摄。
-							裙长请参考出目标，裙子可以前面俩面」+哦如果有一
-							天，突然来了一个闪电，然后突然实物拍摄。裙长请
-							参考出目标，裙子可以前面俩面穿哦									
-						</p>
-						<p class="time">2小时前</p>
-					</div>
-				</li>
-				
-				<li class="commentsItem">
-					<div class="commenter">
-						<div class="haerImg">
-							<span class="haer"></span>
-						</div>
-						<div class="info">
-							<p class="name">王多鱼</p>
-						</div>
-					</div>
-					<div class="commentsContent">
-						<p class="contentTxt">
-							如果有一天，突然来了一个闪电，然后突然实物拍摄。
-							裙长请参考出目标，裙子可以前面俩面」+哦如果有一
-							天，突然来了一个闪电，然后突然实物拍摄。裙长请
-							参考出目标，裙子可以前面俩面穿哦									
-						</p>
-						<p class="time">2小时前</p>
-					</div>
-				</li>				
 
 			</ul>
 			
@@ -105,6 +62,7 @@
 		data(){
 			return {
 				imgs:[],
+				comments:[],
 				leaflet:{
 					statistics:{},
 					card:{
@@ -131,7 +89,7 @@
 			},
 			_commentByleaflet(leafletId){
 				commentByleaflet({leafletId:leafletId}).then((res)=>{
-					
+					this.comments = res.content;
 				}).catch((res)=>{
 					
 				})
@@ -207,15 +165,18 @@
 		.imgList{
 			width: 100%;
 			box-sizing: border-box;
+			padding-top: 3%;
 			.imgItem{
 				margin: 0;
-				margin-bottom: 3px;
+				margin-top: -1%;
 				box-sizing: border-box;
 				display: inline-block;
 				width: 49%;
-				img{
-					width: 100%;
-				}
+				height: 160px;
+				background: deepskyblue;
+			}
+			.imgItem:nth-child(2n){
+				margin-left: 1%;
 			}
 		}
 		
