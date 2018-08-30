@@ -19,25 +19,19 @@
 		<div class="service wap">
 			<h2 class="title">产品&nbsp;&nbsp;/&nbsp;&nbsp;服务</h2>
 			<ul class="productlist">
-				<li class="proItem">
-					<p class="name">小程序开发</p>
-				</li>
-				<li class="proItem">
-					<p class="name">小程序开发</p>
-				</li>
-				<li class="proItem">
-					<p class="name">小程序开发</p>
-				</li>				
+				<li class="proItem" v-for="(item,index) in servList" :key ="index" style="background-size: cover;" v-bind:style="{backgroundImage: 'url(' + item.images.split(',')[0] + ')'}" @click="$router.push({path:'/leaflets',query:{id:item.id}})"  >
+					<p class="name">{{item.descr}}</p>
+				</li>			
 			</ul>
 			
 		</div>		
 		
-		<div class="ad wap">
+		<!--<div class="ad wap">
 			<h2 class="title">广告位</h2>
 			<ul class="adlist">
 				<li class="adItem"></li>			
 			</ul>
-		</div>			
+		</div>			-->
 		
 
 		<div class="qecode wap">
@@ -53,13 +47,14 @@
 </template>
 
 <script>
-	import {cardGet } from './server.js'
+	import {cardGet,listByCard } from './server.js'
 	export default {
 		data(){
 			return {
 				card:{
 					companyAddress:{}
-				}
+				},
+				servList:[],
 				
 			}
 		},
@@ -75,11 +70,21 @@
 				}).catch((res)=>{
 
 				})
+			},
+			_listByCard(id){
+				listByCard({cardId:id}).then((res)=>{
+					this.servList = res;
+					
+				}).catch((res)=>{
+					
+				})
 			}
+			
 			
 		},
 		mounted(){
-			this._cardGet('824');
+			this._cardGet('964');
+			this._listByCard('964');
 		}
 
 	}
@@ -162,7 +167,7 @@
 			margin: 0;
 			padding: 0;
 			display: inline-block;
-			background: deepskyblue;
+			background: #eee;
 			.name{
 				position: absolute;
 				bottom: 0;
@@ -171,10 +176,15 @@
 				width: 100%;
 				height: 24px;
 				line-height: 24px;
+				padding: 0 10px;
 				text-align: center;
 				@include fontsz(12px);
 				color: #fff;
 				background: rgba(0,0,0,.5);
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				
 			}
 		}
 		.proItem:nth-child(2n){

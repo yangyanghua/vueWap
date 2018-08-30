@@ -1,8 +1,8 @@
 <template>
 	<section>
-		<div class="header">
+		<div class="header" @click="$router.push({path:'/visCard',query:{id:leaflet.card.id}})" >
 			<div class="headPortrait">
-				<span class="himg"></span>
+				<span class="himg" v-bind:style="{'backgroundImage': 'url('+leaflet.card.logo+')'}"  ></span>
 			</div>
 			<div class="userinfo">
 				<p class="name">{{leaflet.card.realname}}</p>
@@ -15,7 +15,7 @@
 				{{leaflet.descr}}
 			</p>
 				<ul class="imgList">
-					<li class="imgItem" v-for="(item,index) in imgs" :key="index" v-bind:style="{'background': 'url('+item+') no-repeat 50% 50%'}" ></li>
+					<li class="imgItem" v-for="(item,index) in imgs" :key="index"   v-bind:style="{'backgroundImage': 'url('+item+')'}" ></li>
 				</ul>
 
 		</div>
@@ -32,10 +32,10 @@
 				<li class="commentsItem" v-for="(item,index) in comments" >
 					<div class="commenter">
 						<div class="haerImg">
-							<span class="haer"></span>
+							<span class="haer" v-bind:style="{'background': '#eee url('+item.photo+') no-repeat 50% 50%'}"  ></span>
 						</div>
 						<div class="info">
-							<p class="name">{{item.user.username}}</p>
+							<p class="name">{{item.user.nickname||item.user.username}}</p>
 						</div>
 					</div>
 					<div class="commentsContent">
@@ -79,9 +79,18 @@
 			_leafletGet(id){
 				
 				leafletGet({id:id}).then((res)=>{
+		 
 					this.leaflet = res;
-					this.imgs = res.images.split(',');
+					if(!this.leaflet.statistics){
+						this.leaflet.statistics = {praiseCount:0,tradeCount:0};
+					}
 					
+					
+					
+					this.imgs = res.images.split(',');
+				
+				
+				
 				}).catch((res)=>{
 					
 				})
@@ -90,19 +99,22 @@
 			_commentByleaflet(leafletId){
 				commentByleaflet({leafletId:leafletId}).then((res)=>{
 					this.comments = res.content;
+					
+					
+					
+					
+					
 				}).catch((res)=>{
 					
 				})
 			}
-						
-			
-			
 		},
 
 	
 		mounted(){
-			this._leafletGet('1142');
-			this._commentByleaflet('1142');
+			let id = this.$route.query.id;
+			this._leafletGet(id);
+			this._commentByleaflet(id);
 		}
 
 	}
@@ -123,7 +135,6 @@
 				width: 40px;
 				border-radius:50%;
 				margin-top: 5px;
-				background: url(../../assets/images/erc.jpg) no-repeat 50% 50%;
 				background-size:cover ;
 			}
 		}
@@ -173,8 +184,10 @@
 				display: inline-block;
 				width: 49%;
 				height: 160px;
-				background: deepskyblue;
-			}
+				background-color:#eee;
+				background-size:cover;
+				background-position:50% 0;
+			}			
 			.imgItem:nth-child(2n){
 				margin-left: 1%;
 			}
@@ -258,7 +271,7 @@
 				padding-left: 60px;
 				padding-right: 10px;
 				.contentTxt{
-					@include fontsz(15px);
+					@include fontsz(13px);
 					line-height: 22px;
 					color: #333333;	
 					text-align: justify;				

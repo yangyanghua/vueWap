@@ -9,7 +9,13 @@ export const  cardGet=(params={}) =>{
       }})		
 } 
 
-
+export const  listByCard=(params={}) =>{
+	
+    return http.post(api.listByCard,qs.stringify(params),{
+      headers:{
+            'Content-Type': 'application/x-www-form-urlencoded'
+      }})		
+} 
 
 
 
